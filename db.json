@@ -49,16 +49,6 @@
       "puertas": "2",
       "kms": "2",
       "potencia": "222"
-    },
-    {
-      "id": 43,
-      "titulo": "test",
-      "transaccion": "venta",
-      "descripcion": "t",
-      "precio": "2",
-      "puertas": "4",
-      "kms": "122",
-      "potencia": "222"
     }
   ]
 }

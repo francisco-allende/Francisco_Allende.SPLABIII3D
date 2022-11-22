@@ -4,7 +4,7 @@ import {validarSubmit, validar, validarRadioButton} from "./validaciones.js";
 import { buildTable, refreshTable, hideColumns} from "./tabla.js";
 import {getAutos, updateAuto, deleteAuto, postAuto } from "./peticiones.js";
 
-//Cargo mi BBDD
+//     Cargo BBDD      //
 const chequearPrimeraVez = async () =>{
     let lista = null;
     if(localStorage.getItem('si_fue_visitada')){
@@ -26,7 +26,7 @@ window.addEventListener("load", async () => {
     buildTable(anuncios);
 });
 
-//filtrado
+//     Filtrado      //
 let filtroController = document.getElementById("select-filtro");
 
 filtroController.addEventListener("change", async ()=>{
@@ -50,7 +50,7 @@ filtroController.addEventListener("change", async ()=>{
     await calcularPromedio(anunciosAux);
 })
 
-//promedio
+//     Promedio      //
 const calcularPromedio = async (arr) => 
 {
     let promedio = arr.reduce((prev, actual)=>{
@@ -59,7 +59,7 @@ const calcularPromedio = async (arr) =>
     document.getElementById("txtBoxPromedio").value = promedio;
 }
 
-//tabla sin columnas
+//     Tabla sin columnas      //
 const getCheckedCheckboxes = async () => {
     let checkboxContainer = document.querySelectorAll(".div-checkbox input");
     checkboxContainer.forEach((checkbox)=>{
@@ -92,20 +92,7 @@ const setCheckedCheckboxes = () =>{
 setCheckedCheckboxes();
 getCheckedCheckboxes();
 
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
+//     Fin Tabla sin columnas      //
 
 //Seteo comportamiento botones
 let formBtns = document.getElementsByClassName('btn'); 
@@ -190,7 +177,7 @@ const handlerSeleccionar = async (id, inputs, formBtns) =>{
         {
             modificar(anuncios, inputs, selectedAnuncio, formBtns);
         });
-        //borro el boton de alta
+
         if(document.getElementById("btnCargar") != null){
             document.getElementById("btnCargar").remove();
         }
@@ -247,7 +234,6 @@ function borrar(anuncios, index, inputs, formBtns, carToDelete){
         setEventToBtnCargar();
     }
 
-    //fetch de delete
     deleteAuto(carToDelete.id);
 }
 
@@ -261,7 +247,6 @@ function modificar(anuncios, inputs, selectedAnuncio, formBtns)
         setEventToBtnCargar();
     }
 
-    //fetch de put
     updateAuto(modifiedCar);
 }
 
