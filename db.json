@@ -31,16 +31,6 @@
       "potencia": "230"
     },
     {
-      "id": "5",
-      "titulo": "Chevyyyyy",
-      "transaccion": "alquiler",
-      "descripcion": "popopo",
-      "precio": "500000",
-      "puertas": "2",
-      "kms": "120000",
-      "potencia": "250"
-    },
-    {
       "id": 372,
       "titulo": "bmw",
       "transaccion": "venta",
@@ -48,6 +38,16 @@
       "precio": "19",
       "puertas": "2",
       "kms": "2",
+      "potencia": "222"
+    },
+    {
+      "id": 941,
+      "titulo": "chevy",
+      "transaccion": "venta",
+      "descripcion": "sss",
+      "precio": "999",
+      "puertas": "4",
+      "kms": "444",
       "potencia": "222"
     }
   ]

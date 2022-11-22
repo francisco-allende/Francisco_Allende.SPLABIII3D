@@ -81,7 +81,7 @@ function destroyTable()
     }
 }
 
-//con menos columnas
+//      Tabla con menos columnas        //
 
 function hideColumns(data, columns){
     destroyTable();

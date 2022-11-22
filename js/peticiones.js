@@ -76,29 +76,30 @@ const updateAuto = async (auto) =>
     });
 };
 
-//METODO DELETE CON AJAX 
-const deleteAuto = async (id) =>
-{
+//METODO DELETE CON FETCH
+const deleteAuto = (id) => {
 	addSpinner();
-    return new Promise((resolve,rejected)=>{
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener("readystatechange", ()=>{
-            if(xhr.readyState == 4){
-                if(xhr.status >= 200 && xhr.status < 300){
-                    const data = JSON.parse(xhr.responseText);
-                    resolve(data);
-                }
-                else{
-                    console.error(`Error: ${xhr.status} - ${xhr.statusText}`);
-                    rejected("Error: No se pudo borrar el auto de la base de datos");
-                }
-				destroySpinner();
-            }
-        });
-
-        xhr.open("DELETE", URL + "/" + id);
-        xhr.send();
-    });
+	fetch(URL + `/${id}`, 
+	{
+		method: "DELETE",
+	})
+    .then((res) =>
+	{
+		if(res.ok){
+			return res.json();
+		}else{
+			return Promise.reject(`Error: ${res.status} - ${res.statusText}`);
+		}  
+	})
+    .then((data) => {
+      	console.log(data);
+    })
+    .catch((err) => {
+      	console.error(err);
+    })
+	.finally(()=>{
+		destroySpinner();
+	})
 };
 
 function addSpinner()
