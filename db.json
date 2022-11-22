@@ -51,14 +51,14 @@
       "potencia": "222"
     },
     {
-      "id": 422,
+      "id": 43,
       "titulo": "test",
-      "transaccion": "alquiler",
-      "descripcion": "test",
-      "precio": "9999",
+      "transaccion": "venta",
+      "descripcion": "t",
+      "precio": "2",
       "puertas": "4",
-      "kms": "100",
-      "potencia": "121"
+      "kms": "122",
+      "potencia": "222"
     }
   ]
 }

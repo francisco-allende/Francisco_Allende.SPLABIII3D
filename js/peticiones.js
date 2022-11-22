@@ -1,50 +1,27 @@
 const URL = "http://localhost:3000/autos";
 
-/*
-//METODO GET CON FETCH
-const getAutos = async () => {
-	try {
-		addSpinner();
-		const res = await fetch(URL);
 
-		if (!res.ok) {
-			throw new Error(`${res.status}-${res.statusText}`);
-		}
-		
-		const data = await res.json();
-		return data;
-	} catch (err) {
-		console.error(err);
-	}finally{
-		destroySpinner();
-	}
-};
-*/
-
+//METODO GET CON AJAX
 const getAutos = async () =>
 {
-    return new Promise((resolve,rejected)=>
-    {
+	addSpinner();
+    return new Promise((resolve,rejected)=>{
         const xhr = new XMLHttpRequest();
-
-        xhr.addEventListener("readystatechange", ()=>
-        {
-            if(xhr.readyState == 4)
-            {
+        xhr.addEventListener("readystatechange", ()=>{
+            if(xhr.readyState == 4){
                 if(xhr.status >= 200 && xhr.status < 300){
                     const data = JSON.parse(xhr.responseText);
                     console.log(data);
                     resolve(data);
-                }
-                else{
+                }else{
                     console.error(`Error: ${xhr.status} - ${xhr.statusText}`);
                     rejected("Error: No se encontro la lista de autos");
                 }
+				destroySpinner();
             }
         });
 
         xhr.open("GET", URL);
-
         xhr.send();
     });
 };
@@ -76,6 +53,7 @@ const postAuto = async (auto) => {
 //METODO PUT CON AJAX
 const updateAuto = async (auto) =>
 {
+	addSpinner();
     return new Promise((resolve,rejected)=>{
         const xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", ()=>{
@@ -88,6 +66,7 @@ const updateAuto = async (auto) =>
                     console.error(`Error: ${xhr.status} - ${xhr.statusText}`);
                     rejected("Error: No se pudo actualizar el auto en la base de datos");
                 }
+				destroySpinner();
             }
         });
 
@@ -100,6 +79,7 @@ const updateAuto = async (auto) =>
 //METODO DELETE CON AJAX 
 const deleteAuto = async (id) =>
 {
+	addSpinner();
     return new Promise((resolve,rejected)=>{
         const xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", ()=>{
@@ -112,6 +92,7 @@ const deleteAuto = async (id) =>
                     console.error(`Error: ${xhr.status} - ${xhr.statusText}`);
                     rejected("Error: No se pudo borrar el auto de la base de datos");
                 }
+				destroySpinner();
             }
         });
 
