@@ -1,5 +1,6 @@
 const URL = "http://localhost:3000/autos";
 
+//METODO GET CON FETCH
 const getAutos = async () => {
 	try {
 		addSpinner();
@@ -18,24 +19,7 @@ const getAutos = async () => {
 	}
 };
 
-const getAuto = async (id) => {
-	try{
-		addSpinner();
-		const res = await fetch(URL + `/${id}`);
-
-		if (!res.ok) {
-			throw new Error(`${res.status}-${res.statusText}`);
-		}
-		
-		const data = await res.json();
-		return data;
-	} catch (err) {
-		console.error(err);
-	}finally{
-		destroySpinner();
-	}
-}
-
+//METODO POST CON FETCH CON ASYNC AWAIT
 const postAuto = async (auto) => {
 	addSpinner();
 	fetch(URL, {
@@ -59,59 +43,51 @@ const postAuto = async (auto) => {
 	})
 }
 
-const updateAuto = (auto) => {
-	addSpinner();
-	fetch(URL + `/${auto.id}`, 
-	{
-		method: "PUT",
-		headers: {
-		"Content-Type": "application/json",
-		},
-		body: JSON.stringify(auto),
-	})
-    .then((res) =>
-	{
-		if(res.ok){
-			return res.json();
-		}else{
-			return Promise.reject(`Error: ${res.status} - ${res.statusText}`);
-		}  
-	})
-    .then((data) => {
-      console.log(data);
-	  return data.data;
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-	.finally(()=>{
-		destroySpinner();
-	})
+//METODO PUT CON AJAX
+const updateAuto = async (auto) =>
+{
+    return new Promise((resolve,rejected)=>{
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", ()=>{
+            if(xhr.readyState == 4){
+                if(xhr.status >= 200 && xhr.status < 300){
+                    const data = JSON.parse(xhr.responseText);
+                    resolve(data);
+                }
+                else{
+                    console.error(`Error: ${xhr.status} - ${xhr.statusText}`);
+                    rejected("Error: No se pudo actualizar el auto en la base de datos");
+                }
+            }
+        });
+
+        xhr.open("PUT", URL + "/" + auto.id);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(auto));
+    });
 };
 
-const deleteAuto = (id) => {
-	addSpinner();
-	fetch(URL + `/${id}`, 
-	{
-		method: "DELETE",
-	})
-    .then((res) =>
-	{
-		if(res.ok){
-			return res.json();
-		}else{
-			return Promise.reject(`Error: ${res.status} - ${res.statusText}`);
-		}  
-	})
-    .then((data) => {
-      	console.log(data);
-    })
-    .catch((err) => {
-      	console.error(err);
-    })
-	.finally(()=>{
-		destroySpinner();
-	})
+//METODO DELETE CON AJAX 
+const deleteAuto = async (id) =>
+{
+    return new Promise((resolve,rejected)=>{
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", ()=>{
+            if(xhr.readyState == 4){
+                if(xhr.status >= 200 && xhr.status < 300){
+                    const data = JSON.parse(xhr.responseText);
+                    resolve(data);
+                }
+                else{
+                    console.error(`Error: ${xhr.status} - ${xhr.statusText}`);
+                    rejected("Error: No se pudo borrar el auto de la base de datos");
+                }
+            }
+        });
+
+        xhr.open("DELETE", URL + "/" + id);
+        xhr.send();
+    });
 };
 
 function addSpinner()
@@ -141,7 +117,6 @@ function destroySpinner()
 
 export{
   getAutos,
-  getAuto,
   updateAuto,
   deleteAuto,
   postAuto

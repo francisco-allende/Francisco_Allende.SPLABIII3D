@@ -2,7 +2,7 @@ import {Anuncio_Auto, getTransaccionType} from "./anuncio.js";
 import {vaciar, borrarBotones, loadBtnCargar, loadModifyEliminarBtns, avoidFormSubmit, loadClickedAnuncio, asignarNonValid, modificarObjetoAnuncio} from "./form.js";
 import {validarSubmit, validar, validarRadioButton} from "./validaciones.js";
 import { buildTable, refreshTable, hideColumns} from "./tabla.js";
-import {getAutos, getAuto, updateAuto, deleteAuto, postAuto } from "./peticiones.js";
+import {getAutos, updateAuto, deleteAuto, postAuto } from "./peticiones.js";
 
 //Cargo mi BBDD
 const chequearPrimeraVez = async () =>{

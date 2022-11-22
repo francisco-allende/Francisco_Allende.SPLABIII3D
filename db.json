@@ -31,18 +31,8 @@
       "potencia": "230"
     },
     {
-      "id": "4",
-      "titulo": "Fiat",
-      "transaccion": "venta",
-      "descripcion": "600 1999",
-      "precio": "600000",
-      "puertas": "4",
-      "kms": "130000",
-      "potencia": "240"
-    },
-    {
       "id": "5",
-      "titulo": "Chevy",
+      "titulo": "Chevyyyyy",
       "transaccion": "alquiler",
       "descripcion": "popopo",
       "precio": "500000",
