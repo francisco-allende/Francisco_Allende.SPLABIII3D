@@ -58,28 +58,18 @@ function buildRows(data)
         }
         $tbody.appendChild($fila);
     });
-    
-    const filas = $tbody.children;
-    for (let i = 0; i < filas.length; i++) {
-        if (!(i % 2)) {
-            filas[i].classList.add('rosa')
-        }else{
-            filas[i].classList.add('blanco')
-        }
-    }
 
   return $tbody;
 }
 
 const refreshTable = (data) =>
 {
+    let t = document.getElementById("divTabla");
     destroyTable();  
-    addSpinner();
-    setTimeout(() => {    
+    setTimeout(() => { 
         buildTable(data);
-        destroySpinner();
         }, 3000)
-    localStorage.setItem("lista_anuncios",  JSON.stringify(data));
+    
 }
 
 function destroyTable()
@@ -91,33 +81,82 @@ function destroyTable()
     }
 }
 
-function addSpinner()
-{
-    let container = document.getElementById("containerSpinner");
-    let spinner = document.createElement("div");
-    spinner.classList.add("spinner");
+//con menos columnas
 
-    let iconoAuto = document.createElement("img");
-    iconoAuto.setAttribute("src", "./imagenes/icono_auto_spinner.png")
-    iconoAuto.classList.add("icono_auto");
+function hideColumns(data, columns){
+    destroyTable();
 
-    let p = document.createElement("p");
-    p.classList.add("centrar");
-    p.appendChild(iconoAuto)
+    let $divTabla = document.getElementById("divTabla");
+    let $table = document.createElement('table');
+    $table.classList.add("table");
+    $table.classList.add("table-orderer");
+    $table.classList.add("table-striped"); 
+    $table.classList.add("table-light");
+    $table.classList.add("table-hover");
 
-    spinner.appendChild(p);
-    container.appendChild(spinner);
+    $table.appendChild(buildColumnsWithHideColumns(columns));
+    $table.appendChild(buildRowsWithHideColumns(data, columns));
+
+    $divTabla.appendChild($table);
 }
 
-function destroySpinner()
-{
-    let container = document.getElementById("containerSpinner");
-    let spinner = container.firstElementChild;
-    container.removeChild(spinner); 
+function buildColumnsWithHideColumns(obj)
+{   
+    const $thead = document.createElement("thead"); 
+    $thead.classList.add("table-dark"); 
+    const $fila = document.createElement("tr");
+    let cantidad = Object.keys(obj).length;
+    let porcentaje = 100 / cantidad;
+
+    for (const key in obj) 
+    {
+        const $column = document.createElement("th");
+        $column.textContent = obj[key]; //obj en la posicion key (ya que key es un indice)
+        $column.style.width=`${porcentaje}%`;
+        $fila.append($column);
+    }
+
+    $thead.appendChild($fila);
+    return $thead;
 }
+
+function buildRowsWithHideColumns(data, columns)
+{
+    const $tbody = document.createElement("tbody")
+    
+    data.forEach(element => 
+    {
+        const $fila = document.createElement("tr");
+        
+        for(let key in element)
+        {
+            if(key !== "id")
+            {
+                let $celda = document.createElement("td");
+
+                for(let i = 0; i < Object.keys(columns).length; i++){
+                    if(columns[i] == key){
+                        $celda.textContent = element[key]; 
+                        $fila.append($celda);
+                    }
+                }
+                
+            }else{
+                $fila.setAttribute("data-id", element[key]);
+            }
+        }
+        $tbody.appendChild($fila);
+    });
+
+  return $tbody;
+}
+
+
+
 
 export {
     buildTable,
-    refreshTable
+    refreshTable,
+    hideColumns
 }
 

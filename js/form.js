@@ -127,6 +127,8 @@ function modificarObjetoAnuncio(inputs, selectedAnuncio)
     selectedAnuncio.puertas = inputs[5].value;
     selectedAnuncio.kms = inputs[6].value;
     selectedAnuncio.potencia = inputs[7].value;
+    
+    return selectedAnuncio;
 }
 
 export {

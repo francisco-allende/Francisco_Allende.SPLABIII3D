@@ -1,14 +1,110 @@
-import { anuncios } from "./database.js";
 import {Anuncio_Auto, getTransaccionType} from "./anuncio.js";
 import {vaciar, borrarBotones, loadBtnCargar, loadModifyEliminarBtns, avoidFormSubmit, loadClickedAnuncio, asignarNonValid, modificarObjetoAnuncio} from "./form.js";
 import {validarSubmit, validar, validarRadioButton} from "./validaciones.js";
-import { buildTable, refreshTable} from "./tabla.js";
+import { buildTable, refreshTable, hideColumns} from "./tabla.js";
+import {getAutos, getAuto, updateAuto, deleteAuto, postAuto } from "./fetch.js";
 
-//Storage, cargo mi BBDD
-window.addEventListener("load", () => {        
-    let anuncios = chequearPrimeraVez();
+//Cargo mi BBDD
+const chequearPrimeraVez = async () =>{
+    let lista = null;
+    if(localStorage.getItem('si_fue_visitada')){
+        lista = await getAutos();
+        return lista;
+    }
+    
+    localStorage.setItem('si_fue_visitada', true);
+    localStorage.setItem("lista_anuncios", JSON.stringify(anuncios));
+    lista = JSON.parse(localStorage.getItem('lista_anuncios'));
+    return lista; 
+}
+
+let anunciosFiltrados = [];
+
+window.addEventListener("load", async () => {   
+    let anuncios = await chequearPrimeraVez();
     buildTable(anuncios);
 });
+
+//filtrado
+let filtroController = document.getElementById("select-filtro");
+
+filtroController.addEventListener("change", async ()=>{
+    let tipoTransaccion = document.getElementById("select-filtro").value;
+    let anunciosAux = await getAutos();
+    if(tipoTransaccion != "todos")
+    {
+        anunciosFiltrados = anunciosAux.filter((valor)=>{
+            if(valor.transaccion == tipoTransaccion){
+                return true; 
+            }
+        })
+        refreshTable(anunciosFiltrados);
+        
+        calcularPromedio(anunciosFiltrados);
+        return;
+    }
+    refreshTable(anunciosAux);
+    //seteo todos los anuncios en el storage, sino las cards solo se ven las filtradas de la tabla
+    localStorage.setItem("lista_anuncios",  JSON.stringify(anunciosAux));
+    await calcularPromedio(anunciosAux);
+})
+
+//promedio
+const calcularPromedio = async (arr) => 
+{
+    let promedio = arr.reduce((prev, actual)=>{
+        return parseFloat(prev) + parseFloat(actual.precio); 
+    }, 0);
+    document.getElementById("txtBoxPromedio").value = promedio;
+}
+
+//tabla sin columnas
+const getCheckedCheckboxes = async () => {
+    let checkboxContainer = document.querySelectorAll(".div-checkbox input");
+    checkboxContainer.forEach((checkbox)=>{
+        checkbox.addEventListener("change", ()=>{
+            console.log("aguarde mientas se reacomoda la fila...");
+            buildTableWithLessColumns();
+        })
+    })
+}
+
+const buildTableWithLessColumns = async () =>
+{
+    let checkboxContainer = document.querySelectorAll(".div-checkbox input");
+    let onlyChecked = [];
+    checkboxContainer.forEach((checkbox)=>{
+        if(checkbox.checked){
+            onlyChecked.push(checkbox.value);
+        }
+    })
+    hideColumns(await getAutos(), onlyChecked);
+}
+
+const setCheckedCheckboxes = () =>{
+    let checkboxContainer = document.querySelectorAll(".div-checkbox input");
+    checkboxContainer.forEach((checkbox)=>{
+        checkbox.checked = true;
+    })
+}
+
+setCheckedCheckboxes();
+getCheckedCheckboxes();
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
 
 //Seteo comportamiento botones
 let formBtns = document.getElementsByClassName('btn'); 
@@ -24,7 +120,7 @@ inputs.push(txtTitulo, txtVenta, txtAlquiler, txtDescripcion, txtPrecio, txtPuer
 asignarManejadorDeEventos(inputs);
 asignarNonValid(inputs);
 
-//Cargo un nuevo registro a la tabla dinamica
+//boton cargar 
 let cargar = document.getElementById("btnCargar");
 cargar.addEventListener("click", ()=>{
     handlerCargar(inputs, formBtns);
@@ -35,17 +131,20 @@ let cancelar = document.getElementById("btnCancelar");
 cancelar.addEventListener("click", ()=>{
     vaciar(inputs);
     borrarBotones(formBtns);
+    if(document.getElementById("btnCargar") != null){
+        setEventToBtnCargar();
+    }
 })
 
 // para traer los datos del elemento clickeado
 const $divTabla = document.getElementById("divTabla");
 
-$divTabla.addEventListener("click", (e) => {
+$divTabla.addEventListener("click", async (e) => {
     const emisor = e.target; 
     
     if (emisor.matches("tbody tr td")) {
         let id = emisor.parentElement.dataset.id;
-        handlerSeleccionar(id, inputs, formBtns);
+        await handlerSeleccionar(id, inputs, formBtns);
     }
 });
 
@@ -64,27 +163,16 @@ const handlerCargar = (inputs, formBtns)=>
 	        borrarBotones(formBtns);
             refreshTable(anuncios);
             vaciar(inputs);
+            //fetch de post, de alta
+            postAuto(nuevoAnuncio);
         }else{
             alert("Atencion! No todos los campos han sido llenados correctamente");
         }
     }
 }
 
-function chequearPrimeraVez(){
-    let lista = null;
-    if(localStorage.getItem('si_fue_visitada')){
-        lista = JSON.parse(localStorage.getItem('lista_anuncios'));
-        return lista;
-    }
-    
-    localStorage.setItem('si_fue_visitada', true);
-    localStorage.setItem("lista_anuncios", JSON.stringify(anuncios));
-    lista = JSON.parse(localStorage.getItem('lista_anuncios'));
-    return lista; 
-}
-
-const handlerSeleccionar = (id, inputs, formBtns)=>{
-    let anuncios = JSON.parse(localStorage.getItem("lista_anuncios"));
+const handlerSeleccionar = async (id, inputs, formBtns) =>{
+    let anuncios = await getAutos();
 
     let selectedAnuncio = anuncios.find((element) => element.id == id); 
     let index = anuncios.indexOf(selectedAnuncio);
@@ -95,7 +183,7 @@ const handlerSeleccionar = (id, inputs, formBtns)=>{
         let $btnModificar = loadModifyEliminarBtns("Modificar", "btnModificar");
         $btnEliminar.addEventListener("click", ()=>
         {
-            borrar(anuncios, index, inputs, formBtns);
+            borrar(anuncios, index, inputs, formBtns, selectedAnuncio);
         });
         $btnModificar.addEventListener("click", ()=>
         {
@@ -149,7 +237,7 @@ function agregar(inputs, transaccion){
     return myNewObj;
 }
 
-function borrar(anuncios, index, inputs, formBtns){
+function borrar(anuncios, index, inputs, formBtns, carToDelete){
     anuncios.splice(index, 1);
     refreshTable(anuncios);
     vaciar(inputs);
@@ -157,17 +245,23 @@ function borrar(anuncios, index, inputs, formBtns){
     if(document.getElementById("btnCargar") != null){
         setEventToBtnCargar();
     }
+
+    //fetch de delete
+    deleteAuto(carToDelete.id);
 }
 
 function modificar(anuncios, inputs, selectedAnuncio, formBtns)
 {
-    modificarObjetoAnuncio(inputs, selectedAnuncio);
+    let modifiedCar = modificarObjetoAnuncio(inputs, selectedAnuncio);
     refreshTable(anuncios);
     vaciar(inputs);
     borrarBotones(formBtns);
     if(document.getElementById("btnCargar") != null){
         setEventToBtnCargar();
     }
+
+    //fetch de put
+    updateAuto(modifiedCar);
 }
 
 

@@ -93,6 +93,54 @@
     <div id="containerSpinner">   
     </div>
 
+    <!-- Filtrado -->
+    <div class="container div-filtrado-todo">
+        <div class="div-filtrado">
+                <div>
+                    <span>FILTRAR TRANSACCION</span>
+                    <select name="filtrarTransaccion" id="select-filtro">
+                        <option value="todos" selected>Todos</option>
+                        <option value="alquiler">Alquiler</option>
+                        <option value="venta">Venta</option>
+                    </select>
+                </div>
+                <div>
+                    <span>PROMEDIO</span>
+                    <input name="promedio" type="text" id="txtBoxPromedio" readonly />
+                </div>
+        </div>
+    <div class="div-checkbox">
+        <div class="checkbox-item">
+            <label>Título</label>
+            <input type="checkbox" id="checkTitulo" value="titulo" checked>
+        </div>
+        <div class="checkbox-item">
+            <label>Transacción</label>
+            <input type="checkbox" id="checkTransaccion" value="transaccion" checked>
+        </div>
+        <div class="checkbox-item">
+            <label>Descripción</label>
+            <input type="checkbox" id="checkDescripcion" value="descripcion" checked>
+        </div>
+        <div class="checkbox-item">
+            <label>Precio</label>
+            <input type="checkbox" id="checkPrecio" value="precio" checked>
+        </div>
+        <div class="checkbox-item">
+            <label>Numero Puertas</label>
+            <input type="checkbox" id="checkPuertas" value="puertas" checked>
+        </div>
+        <div class="checkbox-item">
+            <label>Numero Kms</label>
+            <input type="checkbox" id="checkKms" value="kms" checked>
+        </div>
+        <div class="checkbox-item">
+            <label>Potencia</label>
+            <input type="checkbox" id="checkPotencia" value="potencia" checked>
+        </div>
+    </div>
+</div>
+
     <!--Tabla dinamica de anuncios-->
     <div id="divTabla" class="container">
     </div>

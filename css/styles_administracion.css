@@ -63,6 +63,36 @@ nav {
     overflow-x:auto;
 }
 
+.div-filtrado-todo{
+    border: solid 1px;
+    border-radius: 10px;
+    padding: 0.3em;
+    margin-bottom: 1.5em;
+}
+
+.div-filtrado{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2em;
+    font-size: 1.1em;
+    background-color: grey;
+}
+
+.div-checkbox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+
+.checkbox-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Fin tabla dinaimica */
 
 
@@ -121,13 +151,6 @@ nav {
     font-weight: 550;
 }
 
-.rosa{
-    background-color: rgb(209, 193, 205);
-}
-.blanco{
-    background-color: rgb(233, 216, 216);
-}
-
 .inputsAuto{
     display: flex;
     justify-content: space-evenly;
@@ -154,6 +177,7 @@ nav {
 
 /*      Fin Form    */
 
+
 /*      Spinner     */
 
 #containerSpinner{
@@ -176,6 +200,7 @@ nav {
     }
   }
 
+  /* footer */
 
 footer{
     background-color: #095fd7;
@@ -307,7 +332,9 @@ footer{
         padding-left: 0;
         padding-right: 0;
     }
-    
-    
+
+    #copy_footer{
+        font-size: 0.9em;
+    }
 }
 
