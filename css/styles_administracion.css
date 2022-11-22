@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background-color: aliceblue;
+}
+
+.title{
+    text-align: center;
+    padding-top: 0.3em;
+    padding-bottom: 0.5em;
+    font-size: 3em;
+}
+
+#portada{
+    width: 70%;
+    height: 250px;
+}
+
+.img_container{
+    display: flex;
+    justify-content: center;
+}
+
+/*      Navbar      */
+
+nav {
+    background-color: #095fd7;
+    padding-bottom: 0.3em;
+    line-height: 2em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#menu {
+    margin: 0 1em;
+    justify-content: space-around;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.href_non_decoration{
+    text-decoration: none;
+    color: #fff;
+}
+.href_non_decoration:hover{
+    text-decoration: none;
+    color: rgb(215, 193, 193);
+}
+
+#img_logo{
+    width: 150px;
+}
+
+/*      Fin Navbar      */
+
+
+/*      Tabla dinamica      */
+
+#divTabla{
+    overflow-x:auto;
+}
+
+/* Fin tabla dinaimica */
+
+
+/*      Form        */
+#ABM_Form{
+    background-color: #fff;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 1em;
+    margin-top: 1.5em;
+    padding: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3em;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border: 3px solid rgb(106, 110, 107);
+    outline: 2px solid rgb(39, 39, 40);
+    border-radius: 2%;
+}
+
+#formTitle{
+    font-size: 1.8em;
+    text-align: center;
+    background-color: #e0f1f3;
+}
+
+#formDivBtn{
+    display: flex;
+    justify-content: space-around;
+}
+
+#btnCargar{
+    width: 25%;
+}
+
+.formButton:hover{
+    cursor: pointer;
+}
+
+.nonValid{
+    background-color: white;
+}
+
+.valid{
+    background-color: rgb(222, 214, 214);
+}
+
+.success{
+    color: green;
+    font-weight: 550;
+}
+
+.error{
+    color: red;
+    font-weight: 550;
+}
+
+.rosa{
+    background-color: rgb(209, 193, 205);
+}
+.blanco{
+    background-color: rgb(233, 216, 216);
+}
+
+.inputsAuto{
+    display: flex;
+    justify-content: space-evenly;
+    width: fit-content;
+    padding-bottom: 1em;
+}
+#txtPuertas, #txtKms, #txtPotencia{
+    width: 15%;
+}
+
+.icono{
+    width: 8%;
+}
+
+.icono_auto{
+    width: 75%;
+    padding-top: 2em;
+}
+
+.centrar{
+    text-align: center;
+}
+
+
+/*      Fin Form    */
+
+/*      Spinner     */
+
+#containerSpinner{
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5em;
+}
+.spinner{
+    height: 120px;
+    width: 120px;
+    border: 8px solid;
+    border-color: #d7a309 transparent rgb(8, 8, 8) transparent;
+    border-radius: 50%;
+    animation: spin 1.3s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+footer{
+    background-color: #095fd7;
+    color: #fff;
+    display: flex;
+    justify-content: start;
+    font-size: 1.2em;
+    padding-bottom: 0.3em;
+    line-height: 60px;
+    text-align: center;
+}
+
+#menu_footer{
+    margin: 0 1em;
+    justify-content: space-around;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 30%;
+}
+
+.footer_li{
+    display: inline;
+    list-style: none;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+
+@media(max-width:950px) {
+    /* navbar */
+    .navbar{
+        font-size: 0.8em;
+        border-bottom: 1px solid black;
+        align-items: flex-end;
+    }
+    #img_logo{
+        width: 70px;
+        padding-bottom: 1em;
+    }
+
+    .navbar .navbar-expand-lg .justify-content-around{
+        display: block;
+        justify-content: center;
+    }
+
+    .list-inline{
+        margin: 0%;
+    }
+
+    .list-unstyled .list-inline-item{
+        font-weight: 600;
+        padding-bottom: 0.5em;
+    }
+
+    /* header */
+    .title{
+        font-size: 2em;
+    }
+
+    #portada{
+        width: 92%;
+        height: 150px;
+    }
+
+    /* form */
+    #ABM_Form{
+        margin: 0.6em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    
+    #formTitle{
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .inputsAuto{
+        display: block;
+        padding-bottom: 1em;
+    }
+
+    #txtPuertas, #txtKms, #txtPotencia{
+        width: 100%;
+    }
+
+    .icono{
+        width: 20%;
+        padding-bottom: 1em;
+        padding-top: 1em;
+    }
+
+    #btnCargar{
+        height: 80px;
+    }
+
+    #btnModificar, #btnEliminar, #btnCancelar, #btnCargar{
+        width: 5.5em;
+    }
+
+    #formDivBtn{
+        display: block;
+        padding-left: 0.5em;
+        width: 50%;
+        margin-left: 25%;
+    }
+
+    .btn{
+        margin-bottom: 1em;
+    }
+
+    /* tabla */
+    #divTabla{
+        margin-bottom: 1em;
+    }
+
+    /* footer */
+    footer{
+        display: block;
+        font-size: 1.2em;
+        line-height: 60px;
+        text-align: center;
+    }
+    
+    #menu_footer{
+        margin: 0;
+    }
+    
+    .footer_li{
+        display: block;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    
+}
+

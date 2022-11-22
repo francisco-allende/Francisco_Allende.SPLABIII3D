@@ -1,0 +1,64 @@
+{
+  "autos": [
+    {
+      "id": "1",
+      "titulo": "Renault",
+      "transaccion": "venta",
+      "descripcion": "Snadero 2013",
+      "precio": "900000",
+      "puertas": "4",
+      "kms": "110000",
+      "potencia": "120"
+    },
+    {
+      "id": "2",
+      "titulo": "Ford",
+      "transaccion": "venta",
+      "descripcion": "Fiesta 2011",
+      "precio": "900000",
+      "puertas": "4",
+      "kms": "110000",
+      "potencia": "120"
+    },
+    {
+      "id": "3",
+      "titulo": "Toyota",
+      "transaccion": "alquiler",
+      "descripcion": "Hilux 2019",
+      "precio": "700000",
+      "puertas": "4",
+      "kms": "140000",
+      "potencia": "230"
+    },
+    {
+      "id": "4",
+      "titulo": "Fiat",
+      "transaccion": "venta",
+      "descripcion": "600 1999",
+      "precio": "600000",
+      "puertas": "4",
+      "kms": "130000",
+      "potencia": "240"
+    },
+    {
+      "id": "5",
+      "titulo": "Chevy",
+      "transaccion": "alquiler",
+      "descripcion": "popopo",
+      "precio": "500000",
+      "puertas": "2",
+      "kms": "120000",
+      "potencia": "250"
+    },
+    {
+      "id": 385,
+      "titulo": "pppp",
+      "transaccion": "alquiler",
+      "descripcion": "aaa",
+      "precio": "22",
+      "puertas": "2",
+      "kms": "22",
+      "potencia": "222"
+    }
+  ]
+}

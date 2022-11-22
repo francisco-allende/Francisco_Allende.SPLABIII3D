@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background: url("../imagenes/fondo_claro.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.title{
+    padding-top: 0.3em;
+    padding-bottom: 0.5em;
+    font-size: 3em;
+    font-family: Noto Sans, sans-serif;
+    text-shadow: 0 0 10px #fff;
+}
+
+header{
+    margin-right: 40%;
+    margin-left: 1em;
+    background-color: transparent;
+
+}
+
+
+/*      Navbar      */
+
+.navbar {
+    font-size: 2.5em;
+    padding-bottom: 0.3em;
+    line-height: 100px;
+    text-align: center;
+    padding: 0%;
+    text-shadow: 0 0 2px #fff;
+}
+
+
+
+.href_non_decoration{
+    text-decoration: none;
+    color: black;
+}
+
+#img_logo{
+    width: 130px;
+    padding-bottom: 0.5em;
+}
+/*      Fin Navbar      */
+
+/*      Cards       */
+
+.card{
+    background-color: #095fd7;
+    color: #fff;
+}
+
+.card:hover {
+    box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+.icono{
+    width: 10%;
+}
+
+/*      Fin Cards       */
+
+/* responsive. Override bootstrap classes to make them responsive */
+
+@media(max-width:950px) {
+    /* navbar */
+    .navbar{
+        font-size: 0.8em;
+        border-bottom: 1px solid black;
+        align-items: flex-end;
+    }
+    #img_logo{
+        width: 80px;
+        padding-bottom: 1.5em;
+    }
+
+    .navbar .navbar-expand-lg .justify-content-around{
+        display: block;
+        justify-content: center;
+     
+    }
+
+    .list-inline{
+        margin: 0%;
+    }
+
+    .list-unstyled .list-inline-item{
+        text-shadow: 0 0 10px #fff;
+        font-weight: 600;
+    }
+
+    /* header */
+   header{
+        margin-right: 0;
+        margin-left: 0;
+   }
+
+   .title{
+        padding-top: 0;
+        padding-bottom: 0.5em;
+        font-size: 2em;
+        text-align: center;
+    }
+
+    /* cards. Lo mas importante es cambiar el col-lg-3 por col-sm-12 que ya esta en cards.js */
+    .card{
+        margin-bottom: 1.5em;
+    }
+}
