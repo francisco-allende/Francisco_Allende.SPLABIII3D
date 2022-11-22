@@ -336,5 +336,20 @@ footer{
     #copy_footer{
         font-size: 0.9em;
     }
+
+    /* filtrado */
+    .div-filtrado-todo{
+        display: block;
+        padding: 0;
+        width: 90%;
+        margin-bottom: 1em;
+        text-align: center;
+    }
+    .div-filtrado{
+        display: block;
+    }
+    .div-checkbox{
+        display: block;
+    }
 }
 
