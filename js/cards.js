@@ -1,4 +1,3 @@
-
 window.addEventListener("load", buildCards);
 
 function buildCards() {

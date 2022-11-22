@@ -2,18 +2,19 @@ import {Anuncio_Auto, getTransaccionType} from "./anuncio.js";
 import {vaciar, borrarBotones, loadBtnCargar, loadModifyEliminarBtns, avoidFormSubmit, loadClickedAnuncio, asignarNonValid, modificarObjetoAnuncio} from "./form.js";
 import {validarSubmit, validar, validarRadioButton} from "./validaciones.js";
 import { buildTable, refreshTable, hideColumns} from "./tabla.js";
-import {getAutos, getAuto, updateAuto, deleteAuto, postAuto } from "./fetch.js";
+import {getAutos, getAuto, updateAuto, deleteAuto, postAuto } from "./peticiones.js";
 
 //Cargo mi BBDD
 const chequearPrimeraVez = async () =>{
     let lista = null;
     if(localStorage.getItem('si_fue_visitada')){
         lista = await getAutos();
+        localStorage.setItem("lista_anuncios", JSON.stringify(await getAutos()));
         return lista;
     }
     
     localStorage.setItem('si_fue_visitada', true);
-    localStorage.setItem("lista_anuncios", JSON.stringify(anuncios));
+    localStorage.setItem("lista_anuncios", JSON.stringify(await getAutos()));
     lista = JSON.parse(localStorage.getItem('lista_anuncios'));
     return lista; 
 }

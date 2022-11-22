@@ -49,16 +49,6 @@
       "puertas": "2",
       "kms": "120000",
       "potencia": "250"
-    },
-    {
-      "id": 385,
-      "titulo": "pppp",
-      "transaccion": "alquiler",
-      "descripcion": "aaa",
-      "precio": "22",
-      "puertas": "2",
-      "kms": "22",
-      "potencia": "222"
     }
   ]
 }
