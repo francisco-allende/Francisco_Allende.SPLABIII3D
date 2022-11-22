@@ -49,6 +49,16 @@
       "puertas": "4",
       "kms": "444",
       "potencia": "222"
+    },
+    {
+      "id": 661,
+      "titulo": "testtt",
+      "transaccion": "alquiler",
+      "descripcion": "sss",
+      "precio": "22",
+      "puertas": "4",
+      "kms": "44",
+      "potencia": "222"
     }
   ]
 }

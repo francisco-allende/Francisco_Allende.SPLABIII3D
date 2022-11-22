@@ -137,10 +137,10 @@ $divTabla.addEventListener("click", async (e) => {
 });
 
 //      Handlers        //
-const handlerCargar = (inputs, formBtns)=>
+const handlerCargar = async (inputs, formBtns)=>
 {
     let transaccion = getTransaccionType();
-    let anuncios = JSON.parse(localStorage.getItem("lista_anuncios"));
+    let anuncios = await getAutos();
     
     if(Array.isArray(inputs))
     {
@@ -151,7 +151,6 @@ const handlerCargar = (inputs, formBtns)=>
 	        borrarBotones(formBtns);
             refreshTable(anuncios);
             vaciar(inputs);
-            //fetch de post, de alta
             postAuto(nuevoAnuncio);
         }else{
             alert("Atencion! No todos los campos han sido llenados correctamente");
