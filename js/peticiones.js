@@ -1,5 +1,6 @@
 const URL = "http://localhost:3000/autos";
 
+/*
 //METODO GET CON FETCH
 const getAutos = async () => {
 	try {
@@ -17,6 +18,35 @@ const getAutos = async () => {
 	}finally{
 		destroySpinner();
 	}
+};
+*/
+
+const getAutos = async () =>
+{
+    return new Promise((resolve,rejected)=>
+    {
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("readystatechange", ()=>
+        {
+            if(xhr.readyState == 4)
+            {
+                if(xhr.status >= 200 && xhr.status < 300){
+                    const data = JSON.parse(xhr.responseText);
+                    console.log(data);
+                    resolve(data);
+                }
+                else{
+                    console.error(`Error: ${xhr.status} - ${xhr.statusText}`);
+                    rejected("Error: No se encontro la lista de autos");
+                }
+            }
+        });
+
+        xhr.open("GET", URL);
+
+        xhr.send();
+    });
 };
 
 //METODO POST CON FETCH CON ASYNC AWAIT
